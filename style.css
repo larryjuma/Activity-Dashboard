@@ -1,0 +1,79 @@
+
+
+body{
+    background-image: url(images/bg.webp);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    font-family: 'Poppins';
+    color: #ffffff;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+h1, h2, h3, h4
+h5, h6 {
+    font-family: 'Montserrat';
+    color: rgba(0, 0, 0, 0.8);
+
+}
+
+
+nav button{
+    margin: 10px;
+    padding: 5px;
+    font-weight: bold;
+    border-radius: 10px;
+}
+
+nav button:nth-child(1){
+    background-color: turquoise;
+    border-radius: 10px;
+}
+
+nav button:nth-child(2){
+    background-color: blue;
+    border-radius: 10px;
+}
+
+nav button:nth-child(3){
+    background-color: red;
+    border-radius: 10px;
+}
+
+
+nav button:hover:nth-last-child(-n+2){
+    background-color: orange;
+    border-radius: 20px;
+    animation: button 5s ease-in-out infinite;
+}
+
+@keyframes button {
+    0%{opacity: 0; transform: rotateY( '45deg');}
+    25%{opacity: 0.25; transform: rotateY( '45deg');}
+    50%{opacity: 0.5; transform: rotateY( '90deg');}
+    75%{opacity: 0.75; transform: rotateY( '120deg');}
+    100%{opacity: 1; transform: rotateY( '180deg');}
+}
+
+main{
+    margin: 5%;
+}
+
+.toDo{
+    border: 1px solid white;
+    width: 260px;
+    height: auto;
+    background-color: whitesmoke;
+    border-radius: 10px;
+    box-shadow: 4px 4px 5px black;
+}
+
+.toDo input{
+    margin: 5px;
+}
+
+.toDo button{
+    margin: 5px;
+    margin-left: 20px;
+    background-color: lightgreen;
+}
