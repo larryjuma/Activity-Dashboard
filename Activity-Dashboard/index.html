@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NextPlay</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <main>
+        <nav>
+            <button class="active" onclick="showSection('home')">Home</button>
+            <button onclick="showSection('tasks')">Tasks</button>
+            <button onclick="showSection('stopwatch')">stopWatch</button>
+        </nav>
+    
+        <div class="clock">
+            <h1 id="updateTime">00:00:00</h1>
+            <h1 id="greeting"></h1>
+        </div>
+    
+        <section id="home">
+            <h1>Welcome to NextPlay</h1>
+     
+        <h3>Your Ultimate Activity Dashboard</h3> 
+
+        <p>Get all your sports, fitness, and daily tasks in one place. Track your progress, challenge yourself, and stay motivated!</p>
+
+        <div>
+            <h3>Ultimate Dashboard where you:</h3>
+            <ol>
+                <li>Manage Tasks Efficiently</li>
+                <li>Track Your Stopwatch for Races</li>
+                <li>Boost Your Performance</li>
+            </ol>
+        </div>
+        </section>
+    
+
+
+        <section id="tasks" style="display: none;">
+            <h1>Task Manager</h1>
+            <p>Manage, Update and Delete all your Tasks at ease</p>
+
+            <h3>To-Do List</h3>
+            <div class="toDo">
+                <input id="addTask" type="text" placeholder="Add Taks">
+                <button id="addBtn">Add</button>
+                <ol id="addList"></ol>
+            </div>
+            
+         
+        </section>
+
+        <section id="stopwatch" style="display: none;">
+            <h1>Start/Stop</h1>
+
+            <p style="width: 450px;">Track your workouts like a pro! Use this stopwatch to time your reps, rest periods, and endurance sessions. Let's go!</p>
+        </p>
+
+            <div class="container">
+                <div id="display">00:00:00</div>
+
+                <div class="buttons">
+                    <button id="startBtn">Start</button>
+                    <button id="stopBtn">Stop</button>
+                    <button id="resetBtn">Reset</button>
+                </div>
+             
+            </div>
+       
+
+       
+        </section>
+
+    </main>
+
+    <script src="next.js"></script>
+</body>
+</html> 
+
+

@@ -1,0 +1,124 @@
+
+
+body{
+    background-image: url(images/bg.webp);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    font-family: 'Poppins';
+    color: #ffffff;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+h1, h2, h3, h4
+h5, h6 {
+    font-family: 'Montserrat';
+    color: rgba(0, 0, 0, 0.8);
+
+}
+
+
+nav button{
+    margin: 10px;
+    padding: 5px;
+    font-weight: bold;
+    animation: button1 8s ease-in-out infinite;
+}
+
+@keyframes button1 {
+    0%{transform: translateY(-200px);}
+    25%{transform: translateX(0px);}
+    50%{transform: translateX(50px);}
+    75%{transform: translateX(-50px);}
+    100%{transform: translateX(0px);}
+}
+
+
+nav button:nth-child(1){
+    background-color: turquoise;
+}
+
+nav button:nth-child(2){
+    background-color: blue;
+}
+
+nav button:nth-child(3){
+    background-color: red;
+}
+
+
+nav button:hover:nth-last-child(-n+2){
+    background-color: orange;
+    border-radius: 20px;
+   
+}
+
+
+main{
+    margin: 5%;
+}
+
+.toDo{
+    border: 1px solid white;
+    width: 260px;
+    height: auto;
+    background-color: whitesmoke;
+    border-radius: 10px;
+    box-shadow: 4px 4px 5px black;
+}
+
+.toDo input{
+    margin: 5px;
+}
+
+.toDo button{
+    margin: 5px;
+    margin-left: 20px;
+    background-color: lightgreen;
+}
+
+.container{
+    display: grid;
+    margin: auto;
+    justify-content: center;
+    align-items: center;
+    height: 50vh;
+    border: 1px solid white;
+    width: 300px;
+    height: 200px;
+    border-radius: 20px;
+    background: linear-gradient(to left, gray,  rgb(245, 170, 170));
+}
+
+.button{
+    display: flex;
+}
+
+
+.container button{
+    animation: button 5s ease-in-out infinite;
+}
+
+
+@keyframes button{
+    from{transform: scale(1);
+        background-color: gold;
+      }
+
+    to{
+        transform: scale(1.3);
+        background-color: aqua;
+    }
+}
+
+.container button{
+    margin: 5px;
+    border-radius: 5px;
+}
+
+#display{
+    font-size: 45px;
+    font-family: ' Orbitron';
+    text-shadow: 0 0 5px #0ff, 0 0 10px #0ff, 0 0 15px #0ff;
+    margin: auto;
+}
