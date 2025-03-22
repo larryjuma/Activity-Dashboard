@@ -23,6 +23,16 @@ nav button{
     padding: 5px;
     font-weight: bold;
     border-radius: 10px;
+    animation: button 5s ease-in-out;
+}
+
+
+@keyframes button {
+    0%{opacity: 0; transform: translateY(-50px);}
+    25%{opacity: 0.25; transform: translate(-50px);}
+    50%{opacity: 0.5; transform: translateY(-50px);}
+    75%{opacity: 0.75; transform: translateY(-50px);}
+    100%{opacity: 1; transform: translateY(-50px);}
 }
 
 nav button:nth-child(1){
@@ -44,16 +54,9 @@ nav button:nth-child(3){
 nav button:hover:nth-last-child(-n+2){
     background-color: orange;
     border-radius: 20px;
-    animation: button 5s ease-in-out infinite;
+    /* animation: button 5s ease-in-out infinite; */
 }
 
-@keyframes button {
-    0%{opacity: 0; transform: rotateY( '45deg');}
-    25%{opacity: 0.25; transform: rotateY( '45deg');}
-    50%{opacity: 0.5; transform: rotateY( '90deg');}
-    75%{opacity: 0.75; transform: rotateY( '120deg');}
-    100%{opacity: 1; transform: rotateY( '180deg');}
-}
 
 main{
     margin: 5%;
@@ -76,4 +79,10 @@ main{
     margin: 5px;
     margin-left: 20px;
     background-color: lightgreen;
+}
+
+
+#display p{
+    font-weight: bold;
+    font-size: 25px;
 }

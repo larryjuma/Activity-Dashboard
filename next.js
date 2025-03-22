@@ -73,3 +73,70 @@ addBtn.addEventListener("click", () =>{
     addList.appendChild(listItems);
     addTask.value = "";
 })
+
+document.addEventListener("DOMContentLoaded", function(){
+    
+const display = document.getElementById("display")
+const startBtn = document.getElementById("startBtn");
+const resetBtn = document.getElementById("resetBtn");
+const stopBtn = document.getElementById("stopBtn");
+
+let hours = 0, minutes = 0, seconds = 0, milliseconds = 0
+let isRunning = false;
+let timer = null; 
+
+
+function startwatch(){
+    if(isRunning) return;
+    isRunning = true;
+    timer = setInterval(updateTime, 10)
+}
+
+function resetWatch(){
+    clearInterval(timer)
+    isRunning = false;
+    hours = 0
+    minutes = 0
+    seconds = 0
+    milliseconds = 0
+
+    updateDisplay()
+}
+
+function stopWatch(){
+    clearInterval(timer)
+    isRunning = false
+}
+
+function updateTime(){
+    milliseconds += 10
+    if(milliseconds === 1000){
+        milliseconds = 0
+        seconds++
+    }
+    if(seconds === 60){
+        seconds = 0
+        minutes++
+    }
+    if(minutes === 60){
+        minutes = 0
+        hours++
+    }
+
+    updateDisplay()
+}
+
+function updateDisplay(){
+    display.innerText = 
+    String(hours).padStart(2, "0") + ":" +
+    String(minutes).padStart(2, "0") + ":" +
+    String(seconds).padStart(2, "0") + ":" +
+    String(milliseconds).padStart(3, "0")
+}
+
+
+startBtn.addEventListener("click", startwatch);
+resetBtn.addEventListener("click", resetWatch);
+stopBtn.addEventListener("click", stopWatch)
+
+})
