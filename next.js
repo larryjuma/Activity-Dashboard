@@ -43,93 +43,173 @@ function updateTime(){
 updateTime();
 
 // update task
+
+document.addEventListener("DOMContentLoaded", onloadTask)
 const addTask = document.getElementById("addTask");
 const addBtn = document.getElementById("addBtn");
 const addList = document.getElementById("addList");
 
+addBtn.addEventListener("click", importTask)
 
-addBtn.addEventListener("click", () =>{
+function importTask(){
     let taskText = addTask.value.trim();
     if(!taskText) return;
 
-    let deleteBtn = document.createElement("button");
-    deleteBtn.textContent = "remove";
-    deleteBtn.style.margin = "10px";
-    deleteBtn.style.backgroundColor = "lightblue";
-    deleteBtn.style.marginLeft = "30px";
-
     let listItems = document.createElement("li");
+    let deleteBtn = document.createElement("button");
 
     listItems.textContent = taskText;
-    listItems.style.color = "gray";
-    listItems.style.fontFamily = "Inter";
+    deleteBtn.textContent = "Remove";
 
-    deleteBtn.addEventListener("click", ()=>{
-        listItems.remove();
-    });
+    Object.assign(deleteBtn.style, {
+        margin: "10px",
+        backgroundColor: "red"
+    })
 
-    listItems.appendChild(deleteBtn);
+    deleteBtn.addEventListener("click", function(){
+        listItems.remove()
+        deleteTask(taskText)
+    })
+
     addList.appendChild(listItems);
+    listItems.appendChild(deleteBtn);
+
+
+    saveTask(taskText)
+
     addTask.value = "";
-})
-
-// Stop watch
-
-
-
-document.addEventListener("DOMContentLoaded", function(){
-
-const display = document.getElementById("display");
-const startBtn = document.getElementById("startBtn");
-const stopBtn = document.getElementById("stopBtn");
-const resetBtn = document.getElementById("resetBtn");
-
-let hours = 0, minutes = 0, seconds = 0;
-let timer = null;
-let isRunning = false;
-
-function startStopwatch(){
-    if(!isRunning){
-        isRunning = true;
-        timer = setInterval(updateTime, 1000)
-    }
 }
 
-function updateTime(){
-    seconds++
-
-    if(seconds == 60){
-        seconds = 0;
-        minutes++
-    }if(minutes == 60){
-        minutes = 0;
-        hours++
-    }
-
-    let formattedTime =
-    String(hours).padStart(2, "0") + ":" +
-    String(minutes).padStart(2, "0") + ":" +
-    String(seconds).padStart(2, "0");
-
-    display.innerHTML = formattedTime;
+function saveTask(taskText){
+    let tasks = JSON.parse(localStorage.getItem("tasks")) || []
+    tasks.push(taskText)
+    localStorage.setItem("tasks", JSON.stringify(tasks))
 }
 
-function stopStopwatch(){
-    isRunning = false;
-    clearInterval(timer)
+function onloadTask(){
+    let tasks = JSON.parse(localStorage.getItem("tasks")) || []
+
+    tasks.forEach(task => {
+        let listItems = document.createElement("li");
+        listItems.textContent = task;
+
+        let deleteBtn = document.createElement("button");
+        deleteBtn.textContent = "Remove";
+
+        Object.assign(deleteBtn.style, {
+            margin: "10px",
+            backgroundColor: "red"
+        })
+
+        deleteBtn.addEventListener("click", function(){
+            listItems.remove();
+            deleteTask(task)
+        })
+
+        listItems.appendChild(deleteBtn)
+        addList.appendChild(listItems);
+    })
+
+}
+
+function deleteTask(task){
+    let tasks = JSON.parse(localStorage.getItem("tasks")) || []
+    tasks = tasks.filter(t => t !== task)
+    localStorage.setItem("tasks", JSON.stringify(tasks))
+}
+
+(function () {
+
+// Update stopWatch
+const currTime = document.getElementById("currTime")
+const startBtn = document.getElementById("startBtn")
+const resetBtn = document.getElementById("resetBtn")
+const stopBtn = document.getElementById("stopBtn")
+
+let minutes = 0, seconds = 0, milliseconds = 0
+let timer = null
+let isRunning = false
+
+function loadState(){
+    let savedState = JSON.parse(localStorage.getItem("stopwatch")) || {}
+
+    minutes = savedState.minutes || 0;
+    seconds = savedState.seconds || 0;
+    milliseconds = savedState.milliseconds || 0;
+    isRunning = savedState.isRunning || false;
+
+    updateDisplay()
+
+    if(isRunning){
+        startWatch(true)
+    }
+
+}
+
+function startWatch(fromLoad = false){
+    if(isRunning && !fromLoad) return;
+    isRunning = true
+    timer = setInterval(updateTime, 10)
+
+    saveState()
 }
 
 function resetWatch(){
-    isRunning = false;
-    clearInterval(timer)
-    hours = 0;
-    minutes = 0;
-    seconds = 0;
-    display.innerHTML = "00:00:00"
+   clearInterval(timer)
+   isRunning = false
+
+   minutes = 0
+   seconds = 0
+   milliseconds = 0
+
+   updateDisplay()
+   saveState()
 }
 
-startBtn.addEventListener("click", startStopwatch)
-resetBtn.addEventListener("click", resetWatch);
-stopBtn.addEventListener("click", stopStopwatch)
+function stopWatch(){
+    clearInterval(timer);
+    isRunning = false;
 
-})
+    saveState()
+}
+
+function updateTime(){
+    milliseconds += 10;
+
+    if(milliseconds === 1000){
+        milliseconds = 0
+        seconds++
+    }
+    if(seconds === 60){
+        seconds = 0
+        minutes++
+    }
+
+    updateDisplay()
+    saveState()
+}
+
+function updateDisplay(){
+    currTime.innerText = 
+    String(minutes).padStart(2, "0") + ":" +
+    String(seconds).padStart(2, "0") + ":" +
+    String(milliseconds).padStart(3, "0")
+   
+}
+
+function saveState(){
+    localStorage.setItem("stopwatch", JSON.stringify({
+        minutes,
+        seconds,
+        milliseconds,
+        isRunning
+    }))
+}
+
+startBtn.addEventListener("click", startWatch);
+resetBtn.addEventListener("click", resetWatch);
+stopBtn.addEventListener("click", stopWatch)
+
+window.onload = loadState;
+
+})();
