@@ -3,6 +3,7 @@
 function showSection(sectionId){
     document.querySelectorAll("section").forEach(section => {
         section.style.display = "none";
+        
     })
     document.getElementById(sectionId).style.display = "block";
 }
@@ -213,3 +214,43 @@ stopBtn.addEventListener("click", stopWatch)
 window.onload = loadState;
 
 })();
+
+
+//Weather App
+
+const searchButton=  document.querySelector('#searchBtn');
+const cityInput= document.querySelector('#data');
+
+const apiKey =  'a0cee04a2b8214ca5cbb3915b2a90673';
+const apiUrl = 'https://api.openweathermap.org/data/2.5/weather';
+
+async function weatherApp(city){
+    try{
+        const display = await fetch(`${apiUrl}?q=${city}&appid=${apiKey}&units=metric`);
+        const data = await display.json();
+
+        if(data === '404'){
+            alert("Enter a valid city Name")
+        }
+
+        document.querySelector('#temp').textContent = `Temperature: ${data.main.temp} °C`;
+        document.querySelector('#humidity').textContent = `Humidity: ${data.main.humidity}%`;
+        document.querySelector('#description').textContent = `Weather: ${data.weather[0].description}`;
+        document.querySelector('#wind').textContent = `Wind: ${data.wind.speed} m/s`;
+    }
+
+    catch(error){
+        console.error("Error", error)
+    }
+}
+
+searchButton.addEventListener("click", () => {
+    const city = cityInput.value.trim();
+
+    if(city){
+        weatherApp(city)
+    }
+    else{
+        alert("Enter a city Name")
+    }
+})

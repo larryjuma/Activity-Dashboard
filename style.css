@@ -16,6 +16,15 @@ h5, h6 {
 
 }
 
+section{
+    animation: button 3s ease-in-out;
+}
+
+@keyframes button{
+    0%{transform: translateX(-50px)}
+    50%{transform: translateX(50px)}
+}
+
 .toDo{
     width: 300px;
     border: 2px solid gray;
@@ -82,4 +91,17 @@ h5, h6 {
     50%{background-color: greenyellow;}
     75%{background-color: purple;}
     100%{background-color: yellow;}
+}
+
+#weather{
+    color: whitesmoke;
+    font-size: 20px;
+}
+
+#weather input{
+    border-radius: 10px;
+}
+
+#weather button{
+    border-radius: 5px;
 }

@@ -14,6 +14,7 @@
             <button class="active" onclick="showSection('home')">Home</button>
             <button onclick="showSection('tasks')">Tasks</button>
             <button onclick="showSection('stopwatch')">stopWatch</button>
+            <button onclick="showSection('weather')">Weather</button>
         </nav>
     
         <div class="clock">
@@ -67,8 +68,22 @@
 
             <p style="width: 450px;">Track your workouts like a pro! Use this stopwatch to time your reps, rest periods, and endurance sessions. Let's go!</p>
         </p>
-             
+
+  
         </section>
+        </section>
+
+        <section id="weather" style="display: none;">
+
+            <h3>Get the current weather situation in your city</h3>
+
+            <input type="text" id="data"  placeholder="Enter city name">
+            <button id="searchBtn">Search</button>
+            <p id="temp">Temp:---°C</p>
+            <p id="description">Weather:</p>
+            <p id="humidity">Humidity---%</p>
+            <p id="wind">Wind:---m/s</p>
+            
         </section>
 
     </main>
